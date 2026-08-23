@@ -7,3 +7,4 @@
 > Repositório com as atividades práticas da disciplina de Estatística e Probabilidade.
 
 ## Trabalho
+- [Primeiro Trabalho](trabalho_01)
