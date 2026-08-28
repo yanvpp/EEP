@@ -51,7 +51,7 @@ void q243() {
     double prob_marcar_certo_sabendo_resposta = (double)(rand() % 101) / 100.0;// k
 
     printf("\nVariáveis geradas:\n");
-    pritnf("Número de alternativas: %d\n", num_alternativas);
+    printf("Número de alternativas: %d\n", num_alternativas);
     printf("Probabilidade de saber a resposta: %d%%\n", prob_saber_resposta * 100);
     printf("Probabilidade de marar certo sabendo a resposta: %d%%\n", prob_marcar_certo_sabendo_resposta);
     
