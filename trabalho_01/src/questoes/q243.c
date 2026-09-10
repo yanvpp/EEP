@@ -1,6 +1,10 @@
 #include <include/questoes.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+#include <stdbool.h>
 
 /*
 243)
@@ -32,32 +36,75 @@ tenha “chutado” a resposta?
 
 */
 
-void enunciado243() {
+void enunciado243()
+{
     printf("\n|-------------------------|\n");
     printf("|------ Questão 243 ------|\n");
     printf("|-------------------------|\n");
     return;
 }
 
-void q243() {
+void q243()
+{
     enunciado243();
+
+    printf("\n|--------------------------|\n");
+    printf("|------ Sem iteração ------|\n");
+    printf("|--------------------------|\n");
+
+    srand(time(NULL));
 
     printf("\nPrimeiro, resolverei a questão 204, conforme solicitado pelo enunciado.\n");
 
-    int num_alternativas = (rand() % 9) + 2; // m entre 2 e 10 alternativas
-
-    double prob_saber_resposta = (double)(rand() % 101) / 100.0; // p
-
-    double prob_marcar_certo_sabendo_resposta = (double)(rand() % 101) / 100.0;// k
+    int m_alternativas = (rand() % 9) + 2; // entre 2 e 10 questões
+    int p_saber_resposta = (rand() % 101); // 0 a 100%
+    int k_marcar_certo = (rand() % 101);
 
     printf("\nVariáveis geradas:\n");
-    printf("Número de alternativas: %d\n", num_alternativas);
-    printf("Probabilidade de saber a resposta: %d%%\n", prob_saber_resposta * 100);
-    printf("Probabilidade de marar certo sabendo a resposta: %d%%\n", prob_marcar_certo_sabendo_resposta);
-    
-    double prob_chutar = 1.0 - prob_saber_resposta;
-    double chance_acertar_chutando = 1.0 / num_alternativas;
+    printf("Número de alternativas (m): %d\n", m_alternativas);
+    printf("Probabilidade de saber a resposta(p): %d%%\n", p_saber_resposta);
+    printf("Probabilidade de marar certo sabendo a resposta(k): %d%%\n", k_marcar_certo);
 
-    
+    double prob_chutar = 1.0 - p_saber_resposta;
+    double chance_acertar_chutando = 1.0 / m_alternativas;
+
+    printf("\n|--------------------------|\n");
+    printf("|------ Com iteração ------|\n");
+    printf("|--------------------------|\n");
+
+    long iteracoes = pow(10, 6);
+    long sucessos = 0;
+
+    printf("\nVariáveis geradas:\n");
+    printf("Número de alternativas (m): %d\n", m_alternativas);
+    printf("Probabilidade de saber a resposta (p): %d%%\n", p_saber_resposta);
+    printf("Probabilidade de marcar certo sabendo a resposta (k): %d%%\n", k_marcar_certo);
+
+    for (long i = 0; i < iteracoes; i++)
+    {
+        bool sabe_resposta = ((rand() % 100) + 1) <= p_saber_resposta;
+
+        if (sabe_resposta)
+        {
+            bool marca_certo = ((rand() % 100) + 1) <= k_marcar_certo;
+
+            if (marca_certo)
+            {
+                sucessos++;
+            }
+        }
+        else
+        {
+            bool chuta_certo = ((rand() % m_alternativas) == 0);
+
+            if (chuta_certo)
+            {
+                sucessos++;
+            }
+        }
+    }
+
+    printf("\nProbabilidade de o aluno responder corretamente: %.2f%%\n", ((double)sucessos / iteracoes) * 100);
+
     return;
 }
